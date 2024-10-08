@@ -16,7 +16,6 @@ class StockController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    public function index()
     {
         $orders = \DB::select('SELECT * from stocks WHERE ss_quantity <> "0"');
         return view('stocks.index', ['orders' => $orders]);

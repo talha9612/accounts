@@ -13,7 +13,6 @@ class SrvrequisitionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    public function index()
     {
         $fnl = \DB::table('fnlyear')->first();
         $requisitions = \DB::select('SELECT DISTINCT srv_number, srv_name, srv_crname, srv_status, updated_at from srvrequisitions WHERE fyear = ?', [$fnl->fn_name]);

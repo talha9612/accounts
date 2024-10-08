@@ -19,7 +19,7 @@ use Illuminate\Http\Request;
         {
            
             $user = Auth::user();
-            $date = Input::get("date");
+            $date = $request->input("date");
             if ($date==null){
                 $date = date('Y-m-d H:i:s');
             }

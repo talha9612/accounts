@@ -11,7 +11,7 @@ class TrialbalanceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-   public function index()
+   public function index(Request $request)
         {
              
             $fnl = \DB::table('fnlyear')->first();

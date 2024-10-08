@@ -13,7 +13,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $users = \DB::select('SELECT * FROM users');
         return view('users.index', ['users' => $users]);
