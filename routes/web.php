@@ -11,6 +11,9 @@
 |
 */
 use App\Http\Controllers\NetProfitController;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\CustomerageingController;
 // Route::get('/', function () {
 //     return view('master');
 // });
@@ -286,3 +289,4 @@ Route::get('year-create', 'AddYearController@create');
 Route::post('year-save', 'AddYearController@save');
 
 Route::post('/save-netprofit', [NetProfitController::class, 'saveData']);
+Route::get('/customer-ageing', [CustomerageingController::class, 'index'])->name('customerageing.index');

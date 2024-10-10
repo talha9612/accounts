@@ -20,7 +20,6 @@
     <script src="{{asset('assets/jquery-ui.min.js')}}"></script>
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
     <link rel="stylesheet" type="text/css" href="{{asset('css/jquery-ui-1.11.2.css')}}">
-
     <style type="text/css">
     li.mhover:hover, li.mhover:active {background: #00897b;}
     .productsClass {
@@ -493,6 +492,7 @@
             <a href="{{action('GateoutwardController@index')}}" class="dropdown-item text-primary"> Outward Gate Pass</a>
             <a href="{{action('SaleController@index')}}" class="dropdown-item text-primary"> Sales</a>
             <a href="{{action('SalereturnController@index')}}" class="dropdown-item text-primary"> Sale Returns</a>
+            <a href="{{ route('customerageing.index') }}" class="dropdown-item text-primary"> Customer Ageing</a>
     </div>
   </li>
    <?php  } else {  } ?>
