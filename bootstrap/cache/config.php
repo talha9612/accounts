@@ -489,6 +489,10 @@
     array (
       0 => 'C:\\xampp\\htdocs\\accounts\\resources\\views',
     ),
+    'pagination' => 
+    array (
+      'default' => 'bootstrap-4',
+    ),
     'compiled' => 'C:\\xampp\\htdocs\\accounts\\storage\\framework\\views',
   ),
   'dompdf' => 

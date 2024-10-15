@@ -16,7 +16,10 @@ return [
     'paths' => [
         resource_path('views'),
     ],
-
+    'pagination' => [
+        'default' => 'bootstrap-4', // or 'tailwind', depending on your CSS framework
+    ],
+    
     /*
     |--------------------------------------------------------------------------
     | Compiled View Path

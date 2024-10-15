@@ -1,56 +1,96 @@
 @extends('master')
 @section('content')
-<?php if (isset(Auth::user()->salesview) && Auth::user()->salesview == '1') { ?>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<?php
+if (isset(Auth::user()->salesledgersview) && Auth::user()->salesledgersview == '1') { ?>
+    <!-- WORK AREA START -->
     <h3 align="center" class="text-primary">
-        All <small class="text-muted">Quotations List</small>
+        Sales <small class="text-muted">(Customer Ageing)</small>
     </h3>
+    <div class="card">
+        <div class="card-header card-header-rose card-header-icon bg-primary">
+            <div class="card-icon">
+                <i class="material-icons">assignment</i>
+            </div>
+            <h4 class="card-title text-white">Customer Ageing</h4>
+        </div>
+        <div class="card-body">
+            <div class="toolbar">
+                <!--   Here you can write extra buttons/actions for the toolbar  -->
+            </div>
+            <div class="material-datatables">
+                <div id="datatables_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-inline">
+                                <div style="width: 90%" align="rigt">
+                                    <input id="myInput" type="text" placeholder="Search.." class="form-control" onfocusout="calcFunction()" style="width: 95%">
+                                </div>
+                            </div>
+                            <div id="div1">
+                                <table id="myTable" class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Farmer Name</th>
+                                            <th>Invoice #</th>
+                                            <th>Issue Date</th>
+                                            <th>Debit Amount</th>
+                                            <th>Days Ago</th> <!-- New column for Days Ago -->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($saleInvoices as $invoice)
+                                        <tr>
+                                            <td>{{ $invoice->fr_name }}</td>
+                                            <td>{{ $invoice->invoice_number }}</td>
+                                            <td>{{ $invoice->issue_date }}</td>
+                                            <td>{{ number_format($invoice->debit_amount, 2, '.', ',') }}</td>
+                                            <td>{{ $invoice->days_ago }} days ago</td> <!-- Display Days Ago -->
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                {{ $saleInvoices->links() }} <!-- Pagination links -->
+                            </div>
 
-    <div class="material-datatables">
-        <div id="datatables_wrapper" class="dataTables_wrapper dt-bootstrap4">
-            <div class="row">
-                <div class="col-sm-12">
-                    <table id="datatables" class="table table-striped table-bordered table-hover dataTable dtr-inline" 
-                           cellspacing="0" width="100%" style="width: 100%;" role="grid" 
-                           aria-describedby="datatables_info" aria-label="Quotations List">
-                        <caption>List of all quotations records.</caption>
-                        <thead>
-                            <tr>
-                                <th>Sq Number</th>
-                                <th>Sale Name (fr_name)</th>
-                                <th>Sale Price</th>
-                                <th>Grand Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if($quotations->isEmpty())
-                                <tr>
-                                    <td colspan="2" class="text-center">No quotations found.</td>
-                                </tr>
-                            @else
-                                @foreach ($quotations as $quotation)
-                                    <tr>
-                                        <td>{{ $quotation->sq_number }}</td>
-                                        <td>{{ $quotation->fr_name }}</td>
-                                        <td>{{ $quotation->sq_saleprice }}</td>
-                                        <td>{{ $quotation->sq_grandtotal }}</td>
-                                    </tr>
-                                @endforeach
-                            @endif
-                        </tbody>
-                    </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <!-- end content-->
 
-    <div>
-        {{ $quotations->links() }}
-    </div>
-    
-@endsection
+    <!-- WORK AREA END -->
 
-<link href="{{ asset('assets/material.css') }}" rel="stylesheet" />
+    <script src="{{asset('assets/sorting.js')}}"></script>
+    <script>
+        function searchTable() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
 
-<?php } else {
+            for (i = 1; i < tr.length; i++) {
+                tr[i].style.display = "none"; // Hide all rows initially
+
+                // Loop through all td elements in each row
+                td = tr[i].getElementsByTagName("td");
+                for (var j = 0; j < td.length; j++) {
+                    if (td[j]) {
+                        txtValue = td[j].textContent || td[j].innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = ""; // Show row if match is found
+                            break; // Break to show row and move to the next row
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    @endsection
+    <link href="{{asset('assets/material.css')}}" rel="stylesheet" />
+<?php  } else {
     redirect()->to('home')->send();
 } ?>

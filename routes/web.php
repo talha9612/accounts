@@ -290,3 +290,4 @@ Route::post('year-save', 'AddYearController@save');
 
 Route::post('/save-netprofit', [NetProfitController::class, 'saveData']);
 Route::get('/customer-ageing', [CustomerageingController::class, 'index'])->name('customerageing.index');
+Route::get('/sale-ageing', [CustomerageingController::class, 'sale'])->name('saleageing.sale');
