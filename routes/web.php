@@ -14,6 +14,9 @@ use App\Http\Controllers\NetProfitController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CustomerageingController;
+use App\Http\Controllers\CashtransactionController;
+use App\Http\Controllers\SalereceiptController;
+
 // Route::get('/', function () {
 //     return view('master');
 // });
@@ -59,7 +62,10 @@ Route::resource('supplierledgers','SupplierledgerController');
 
 Route::resource('banktransactions','BanktransactionController');
 
-Route::resource('bankreceipts','BankreceiptController');
+Route::resource('bankreceipts','BankreceiptController'); 
+
+Route::resource('salereceipts','SalereceiptController'); 
+Route::post('salereceipts/store', [SalereceiptController::class, 'store'])->name('salereceipts.Store');
 
 Route::resource('bankledgers','BankledgerController');
 
@@ -144,6 +150,7 @@ Route::post('aging-days','CustomerAgingController@AgingDaysSearch');
 
 
 Route::get('searchaccount', ['as'=>'searchaccount','uses'=>'CashtransactionController@searchAccount']);
+Route::get('/search-head', [SalereceiptController::class, 'searchHead'])->name('searchHead');
 
 Route::get('searchteacher', ['as'=>'searchteacher','uses'=>'TeacherController@searchTeacher']);
 
@@ -166,8 +173,11 @@ Route::get('searchvouchercr', ['as'=>'searchvouchercr','uses'=>'CashreceiptContr
 Route::get('searchvoucherbk', ['as'=>'searchvoucherbk','uses'=>'BanktransactionController@searchVoucherbk']);
 
 Route::get('searchvoucherbr', ['as'=>'searchvoucherbr','uses'=>'BankreceiptController@searchVoucherbr']);
-
+Route::get('searchreciept', ['as'=>'searchreciept','uses'=>'SalereceiptController@searchReciept']);
+Route::get('getInvoicesByCustomer', ['as'=>'getInvoicesByCustomer','uses'=>'SalereceiptController@getInvoicesByCustomer']);
 Route::get('searchbankaccount', ['as'=>'searchbankaccount','uses'=>'BanktransactionController@searchAccount']);
+
+Route::get('searchCustomer', ['as'=>'searchCustomer','uses'=>'SaleReceiptController@searchCustomer']);//
 
 Route::get('searchexpensehead', ['as'=>'searchexpensehead','uses'=>'BanktransactionController@searchHead']);
 
@@ -290,4 +300,3 @@ Route::post('year-save', 'AddYearController@save');
 
 Route::post('/save-netprofit', [NetProfitController::class, 'saveData']);
 Route::get('/customer-ageing', [CustomerageingController::class, 'index'])->name('customerageing.index');
-Route::get('/sale-ageing', [CustomerageingController::class, 'sale'])->name('saleageing.sale');

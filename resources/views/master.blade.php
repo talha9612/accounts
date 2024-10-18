@@ -112,9 +112,16 @@
                           if(isset(Auth::user()->breceiptsadd) && Auth::user()->breceiptsadd == '1')
                                 { ?>
                           <li class="nav-item">
-                            <a class="nav-link" href="{{action('BankreceiptController@create')}}">Bank Receipt</a>
+                          <a class="nav-link" href="{{ route('bankreceipts.create') }}">Bank Receipt</a>
                           </li>
                            <?php } else {} ?>
+                           <?php
+                          if(isset(Auth::user()->breceiptsadd) && Auth::user()->breceiptsadd == '1')
+                                { ?>
+                          <li class="nav-item">
+                            <a class="nav-link" href="{{action('SalereceiptController@create')}}">Sale Receipt</a>
+                          </li>
+                           <?php } else {} ?> 
 
                           <li class="nav-item dropdown bg-dark">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -308,10 +315,11 @@
       if(isset(Auth::user()->breceiptsview) && Auth::user()->breceiptsview == '1')
                 { ?>
     <li class="dropdown-item">
-    <a style="text-decoration: none" href="{{action('BankreceiptController@index')}}" aria-expanded="false">
+    <a style="text-decoration: none" href="{{ route('bankreceipts.create') }}" aria-expanded="false">
       <i class="material-icons text-dark">receipt</i>
         <b>Bank Receipts</b>
-      </a>
+      </a>                       
+
     </li>
      <?php  } else { } ?>
       <?php
